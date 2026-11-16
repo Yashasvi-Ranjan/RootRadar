@@ -15,3 +15,5 @@ apifd:
     scheduling-enabled: false   # no background telemetry polling in tests
   detection:
     enabled: false     # tests drive DetectionPipeline.runOnce() explicitly
+  incident:
+    reopen-window-seconds: 300   # tests assume the production window; application.yml shortens it for live demos

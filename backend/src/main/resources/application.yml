@@ -67,7 +67,7 @@ apifd:
   incident:                                                    # owner: Agent 5
     confirm-evaluations: 2                                     # DETECTED -> ACTIVE after N consecutive evaluations still anomalous
     recovery-evaluations: 3                                    # RECOVERING -> RESOLVED after N consecutive fully-normal evaluations
-    reopen-window-seconds: 300                                 # anomaly recurring this soon after RESOLVED reopens the same incident
+    reopen-window-seconds: 30                                  # anomaly recurring this soon after RESOLVED reopens the same incident
     no-data-resolve-minutes: 10                                # RECOVERING with no valid samples this long -> RESOLVED (resolution_reason=NO_DATA)
   realtime:                                                    # owner: Agent 5
     sse-timeout-ms: 0                                          # 0 = no server-side timeout
