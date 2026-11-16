@@ -1,0 +1,17 @@
+# Integration tests (@ActiveProfiles("test")) use the real local PostgreSQL, a SEPARATE database (apifd_test).
+# Create once:  psql postgres -c "create database apifd_test owner apifd"
+spring:
+  datasource:
+    url: ${TEST_DB_URL:jdbc:postgresql://localhost:5432/apifd_test}
+    username: ${TEST_DB_USER:apifd}
+    password: ${TEST_DB_PASSWORD:apifd_dev}
+  flyway:
+    locations: classpath:db/migration
+apifd:
+  demo-mode: false
+  monitoring:
+    scheduling-enabled: false   # no background health checks in tests (tests call the runner explicitly)
+  telemetry:
+    scheduling-enabled: false   # no background telemetry polling in tests
+  detection:
+    enabled: false     # tests drive DetectionPipeline.runOnce() explicitly

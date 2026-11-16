@@ -1,0 +1,11 @@
+# Activated with SPRING_PROFILES_ACTIVE=demo. Adds the demo seed data (4 nodes, 3 edges) and flags the system as demo.
+spring:
+  flyway:
+    locations: classpath:db/migration,classpath:db/demo
+apifd:
+  demo-mode: true
+  monitoring:
+    allowed-hosts: localhost,127.0.0.1
+logging:
+  level:
+    com.rootradar.apifd: DEBUG

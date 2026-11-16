@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: apifd-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/apifd}
+    username: ${DB_USER:apifd}
+    password: ${DB_PASSWORD:apifd_dev}
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: always
+    time-zone: UTC
+  task:
+    scheduling:
+      pool:
+        size: 4
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+# ---------------------------------------------------------------------------
+# Application settings. Typed binding class: com.rootradar.apifd.config.ApifdProperties
+# Each agent may add keys ONLY inside its own section (and the matching nested record).
+# ---------------------------------------------------------------------------
+apifd:
+  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:5173}   # CORS: the only allowed browser origin
+  demo-mode: false                                             # true only in the `demo` profile
+  monitoring:                                                  # owner: Agent 2
+    allowed-hosts: ${ALLOWED_HOSTS:localhost,127.0.0.1}        # SSRF allowlist (exact host match, case-insensitive)
+    allowed-schemes: http,https
+    max-concurrent-checks: 8                                   # bounded pool for health checks AND telemetry polls
+    scheduler-tick-ms: 1000                                    # how often due checks are evaluated
+    default-interval-seconds: 10
+    default-timeout-ms: 2000
+    max-response-bytes: 1048576
+  telemetry:                                                   # owner: Agent 2
+    poll-interval-seconds: 10
+    poll-timeout-ms: 3000
+    poll-max-windows: 60                                       # sent as ?since= semantics; hard cap on windows parsed per poll
+  detection:                                                   # owner: Agent 5 (pipeline) / Agent 3 (rules)
+    enabled: true
+    interval-seconds: 10                                       # DetectionPipeline period
+    lookback-minutes: 30                                       # history handed to the detector (>= baselineWindows+evaluation windows)
+    window-seconds: 10                                         # must equal demo services' telemetry window
+  incident:                                                    # owner: Agent 5
+    confirm-evaluations: 2                                     # DETECTED -> ACTIVE after N consecutive evaluations still anomalous
+    recovery-evaluations: 3                                    # RECOVERING -> RESOLVED after N consecutive fully-normal evaluations
+    reopen-window-seconds: 300                                 # anomaly recurring this soon after RESOLVED reopens the same incident
+    no-data-resolve-minutes: 10                                # RECOVERING with no valid samples this long -> RESOLVED (resolution_reason=NO_DATA)
+  realtime:                                                    # owner: Agent 5
+    sse-timeout-ms: 0                                          # 0 = no server-side timeout
+    heartbeat-seconds: 15
+    max-emitters: 100
+  retention:                                                   # documented only in v1 (see docs/DATABASE_DESIGN.md)
+    enabled: false
+    raw-days: 7
+    cron: "0 30 3 * * *"
+
+logging:
+  level:
+    com.rootradar.apifd: INFO

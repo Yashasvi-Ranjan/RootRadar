@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: payment-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/apifd}
+    username: ${DB_USER:apifd}
+    password: ${DB_PASSWORD:apifd_dev}
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 3000
+server:
+  port: 8083
+  address: 127.0.0.1
+demo:
+  db-faults-supported: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    db:
+      enabled: false

@@ -1,0 +1,24 @@
+# Local PostgreSQL for the RootRadar backend, the demo payment-service and the integration tests.
+# Alternative to a Homebrew/system Postgres. Usage:  docker compose up -d postgres
+# Creates database `apifd` (app + demo payment schema `demo_payments`) and `apifd_test` (backend integration tests).
+# The apps themselves run on the host via scripts/start-all.sh (they are not containerised).
+services:
+  postgres:
+    image: postgres:15
+    container_name: apifd-postgres
+    environment:
+      POSTGRES_DB: apifd
+      POSTGRES_USER: ${DB_USER:-apifd}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-apifd_dev}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - apifd-pgdata:/var/lib/postgresql/data
+      - ./scripts/db/create-databases.sql:/docker-entrypoint-initdb.d/10-create-databases.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-apifd} -d apifd"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+volumes:
+  apifd-pgdata:
