@@ -10,8 +10,7 @@ ranks the probable root cause with an explainable rule-based score, and tracks i
 - Frontend: React + Vite (JavaScript), React Router, Recharts.
 
 Ports: backend 8080, gateway 8081, order 8082, payment 8083, frontend 5173, PostgreSQL 5432.
-More detail: `docs/ARCHITECTURE.md`, `docs/API_CONTRACTS.md`, `docs/ANOMALY_DETECTION.md`, `docs/RCA_SCORING_MODEL.md`,
-`docs/DATABASE_DESIGN.md`, `docs/DEMO_GUIDE.md`, and the per-agent reports in `docs/agent-reports/`.
+
 
 ## 1. Prerequisites (fresh machine)
 | Tool | Version | macOS install |
