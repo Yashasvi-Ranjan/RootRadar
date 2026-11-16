@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 
 /** Health checks against in-process JDK HTTP servers; results are persisted in the real PostgreSQL test DB. */
+@SuppressWarnings("resource")
 class HealthCheckIT extends MonitoringIT {
 
     @Autowired HealthCheckRunner runner;

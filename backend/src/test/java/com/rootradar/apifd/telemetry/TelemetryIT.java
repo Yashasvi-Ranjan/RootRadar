@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** Telemetry ingest (idempotency, validation), collector polling, metric queries; real PostgreSQL. */
+@SuppressWarnings("resource")
 class TelemetryIT extends MonitoringIT {
 
     private static final Instant T0 = Instant.parse("2026-11-10T08:00:00Z");

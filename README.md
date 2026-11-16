@@ -102,4 +102,4 @@ All variables are listed in `.env.example`. Detection/monitoring tuning is in `b
 | Browser CORS error | the UI must be served from `FRONTEND_ORIGIN` (default http://localhost:5173); use the Vite dev server so `/api` is proxied |
 | Reset all data | `scripts/stop-all.sh; psql postgres -c "drop database apifd" -c "create database apifd owner apifd"; scripts/start-all.sh` |
 
-Never commit `.env`; the default credentials are for local development only.
+

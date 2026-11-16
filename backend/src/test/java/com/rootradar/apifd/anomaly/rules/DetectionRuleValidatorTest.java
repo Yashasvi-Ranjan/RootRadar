@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import com.rootradar.apifd.anomaly.RuleMetric;
 import com.rootradar.apifd.common.ApiException;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import com.rootradar.apifd.monitoring.MonitoredService;

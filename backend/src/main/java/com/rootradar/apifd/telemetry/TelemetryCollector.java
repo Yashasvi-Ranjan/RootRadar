@@ -3,7 +3,6 @@ package com.rootradar.apifd.telemetry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rootradar.apifd.common.ApiException;
 import com.rootradar.apifd.config.ApifdProperties;
-import com.rootradar.apifd.monitoring.HealthOutcome;
 import com.rootradar.apifd.monitoring.MonitoredService;
 import com.rootradar.apifd.monitoring.NodeType;
 import com.rootradar.apifd.monitoring.SafeHttpClient;

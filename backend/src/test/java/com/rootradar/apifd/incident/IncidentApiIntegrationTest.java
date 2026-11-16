@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.rootradar.apifd.anomaly.AnomalyDetector;
 import com.rootradar.apifd.anomaly.SeriesState;
 import com.rootradar.apifd.common.Severity;
 import org.junit.jupiter.api.Test;

@@ -60,6 +60,7 @@ public class DownstreamClient {
                 }
                 return new Response(res.getStatusCode().value(), node);
             });
+            if (r == null) throw new ApiException.DownstreamFailure(name + " returned no response", null);
             error = !r.ok();
             return r;
         } catch (RestClientException e) {

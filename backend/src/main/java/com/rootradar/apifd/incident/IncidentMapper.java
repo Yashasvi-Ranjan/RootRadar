@@ -3,7 +3,6 @@ package com.rootradar.apifd.incident;
 import com.rootradar.apifd.anomaly.store.ServiceLookup;
 import com.rootradar.apifd.common.ServiceRef;
 import com.rootradar.apifd.incident.persistence.DiagnosisEntity;
-import com.rootradar.apifd.incident.persistence.DiagnosisRepository;
 import com.rootradar.apifd.incident.persistence.FactorEntity;
 import com.rootradar.apifd.incident.persistence.FactorRepository;
 import com.rootradar.apifd.incident.persistence.FindingEntity;
@@ -31,15 +30,13 @@ import org.springframework.stereotype.Component;
 @Component
 class IncidentMapper {
     private final IncidentServiceRepository incidentServices;
-    private final DiagnosisRepository diagnoses;
     private final FindingRepository findings;
     private final FactorRepository factors;
     private final Clock clock;
 
-    IncidentMapper(IncidentServiceRepository incidentServices, DiagnosisRepository diagnoses,
+    IncidentMapper(IncidentServiceRepository incidentServices,
                    FindingRepository findings, FactorRepository factors, Clock clock) {
         this.incidentServices = incidentServices;
-        this.diagnoses = diagnoses;
         this.findings = findings;
         this.factors = factors;
         this.clock = clock;

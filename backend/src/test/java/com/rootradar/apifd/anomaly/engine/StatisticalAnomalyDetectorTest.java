@@ -346,7 +346,6 @@ class StatisticalAnomalyDetectorTest {
 
     @Test
     void firstBreachAtIsStableWhileIncidentGrows() {
-        Instant first = null;
         for (int len = 3; len <= 50; len += 7) {
             AnomalyEvent e = only(run(b().normal(30).latency(len, 400).build(PAYMENT)));
             Instant expected = T.minusSeconds((long) len * W);

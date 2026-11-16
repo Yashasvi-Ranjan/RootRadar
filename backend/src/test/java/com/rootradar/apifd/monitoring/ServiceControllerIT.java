@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 /** REST contract of /api/services/** (API_CONTRACTS section 2) against the real DB. */
 @AutoConfigureMockMvc
+@SuppressWarnings("resource")
 class ServiceControllerIT extends MonitoringIT {
 
     @Autowired MockMvc mvc;
